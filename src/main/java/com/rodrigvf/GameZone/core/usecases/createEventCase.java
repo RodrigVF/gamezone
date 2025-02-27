@@ -2,8 +2,8 @@ package com.rodrigvf.GameZone.core.usecases;
 
 import com.rodrigvf.GameZone.core.entities.Event;
 
-public interface getEventCase {
+public interface createEventCase {
 
-    public Event execute(Long id);
+    public Event execute(Event event);
 
 }
