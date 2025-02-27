@@ -15,7 +15,6 @@ spring:
   flyway:
     enable: true
     locations: classpath:db/migrations
-    baseline-on-migrate: true
 
 springdoc:
   api-docs:
