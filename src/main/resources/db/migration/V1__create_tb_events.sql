@@ -1,7 +1,7 @@
 --V1_create_tb_events.sql
 CREATE TABLE tb_events (
     id SERIAL PRIMARY KEY,
-    identifier VARCHAR(255) NOT NULL,
+    identifier VARCHAR(255) NOT NULL UNIQUE,
     name VARCHAR(255) NOT NULL,
     organizer VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL,
