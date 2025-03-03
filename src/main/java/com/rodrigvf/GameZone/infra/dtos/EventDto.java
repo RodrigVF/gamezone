@@ -1,10 +1,12 @@
-package com.rodrigvf.GameZone.core.entities;
+package com.rodrigvf.GameZone.infra.dtos;
 
 import com.rodrigvf.GameZone.core.enumns.Status;
+import lombok.Builder;
 
 import java.time.LocalDateTime;
 
-public record Event(
+@Builder
+public record EventDto(
         Long id,
         String identifier,
         String name,

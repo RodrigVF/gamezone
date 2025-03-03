@@ -2,8 +2,10 @@ package com.rodrigvf.GameZone.core.usecases;
 
 import com.rodrigvf.GameZone.core.entities.Event;
 
-public interface getEventCase {
+import java.util.List;
 
-    public Event execute(Long id);
+public interface GetEventCase {
+
+    public List<Event> execute();
 
 }
