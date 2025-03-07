@@ -8,6 +8,7 @@ import com.rodrigvf.GameZone.infra.persistence.EventRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class EventRepositoryGateway implements EventGateway {
@@ -34,6 +35,18 @@ public class EventRepositoryGateway implements EventGateway {
                 .stream()
                 .map(eventEntityMapper::toDomain)
                 .toList();
+    }
+
+    @Override
+    public boolean existsByIdentifier(String identifier) {
+        return eventRepository.findAll()
+                .stream()
+                .anyMatch(event -> event.getIdentifier().equals(identifier));
+    }
+
+    @Override
+    public Optional<Event> filterByIdentifier(String identifier) {
+        return eventRepository.findByIdentifier(identifier);
     }
 
 }

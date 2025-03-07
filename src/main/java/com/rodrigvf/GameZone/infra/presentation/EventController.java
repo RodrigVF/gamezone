@@ -2,6 +2,7 @@ package com.rodrigvf.GameZone.infra.presentation;
 
 import com.rodrigvf.GameZone.core.entities.Event;
 import com.rodrigvf.GameZone.core.usecases.CreateEventCase;
+import com.rodrigvf.GameZone.core.usecases.FilterByIdentifierEventCase;
 import com.rodrigvf.GameZone.core.usecases.GetEventCase;
 import com.rodrigvf.GameZone.infra.dtos.EventDto;
 import com.rodrigvf.GameZone.infra.mappers.EventDtoMapper;
@@ -19,11 +20,13 @@ public class EventController {
 
     private final CreateEventCase createEventCase;
     private final GetEventCase getEventCase;
+    private final FilterByIdentifierEventCase filterByIdentifierEventCase;
     private final EventDtoMapper eventDtoMapper;
 
-    public EventController(CreateEventCase createEventCase, GetEventCase getEventCase, EventDtoMapper eventDtoMapper) {
+    public EventController(CreateEventCase createEventCase, GetEventCase getEventCase, FilterByIdentifierEventCase filterByIdentifierEventCase, EventDtoMapper eventDtoMapper) {
         this.createEventCase = createEventCase;
         this.getEventCase = getEventCase;
+        this.filterByIdentifierEventCase = filterByIdentifierEventCase;
         this.eventDtoMapper = eventDtoMapper;
     }
 
@@ -42,5 +45,11 @@ public class EventController {
                 .stream()
                 .map(eventDtoMapper::toDto)
                 .toList();
+    }
+
+    @GetMapping("/{identifier}")
+    public ResponseEntity<EventDto> getAllEvents(@PathVariable String identifier) {
+        Event event = filterByIdentifierEventCase.execute(identifier);
+        return ResponseEntity.ok(eventDtoMapper.toDto(event));
     }
 }
